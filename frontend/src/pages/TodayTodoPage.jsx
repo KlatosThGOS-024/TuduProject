@@ -3,7 +3,6 @@ import { HeaderComponent } from "../components/HeaderComponent";
 function Input({ placeholder }) {
   return (
     <div className=" rounded-lg border-2 flex items-center gap-2 px-[12px] bg-white w-full">
-      {" "}
       <img
         className="w-[18px]"
         src="/icons/plus-large-thick-svgrepo-com.svg"

@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderComponent } from "../components/HeaderComponent";
-function Input({ placeholder }) {
+export function Input({ placeholder, setInput }) {
   return (
     <div className=" rounded-lg border-2 flex items-center gap-2 px-[12px] bg-white w-full">
       <img
@@ -8,6 +8,9 @@ function Input({ placeholder }) {
         src="/icons/plus-large-thick-svgrepo-com.svg"
       ></img>
       <input
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
         className=" outline-none px-[5px] w-full py-[8px] placeholder:text-gray-400"
         placeholder={placeholder}
       ></input>

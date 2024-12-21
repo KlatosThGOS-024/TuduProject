@@ -4,16 +4,20 @@ import ApiResponse from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const todoSave = asyncHandler(async (req, res) => {
-  const { task, description } = await req.body;
-  if (task == " ") {
-    throw new ApiError(400, "Provide taskName! Undefined task???");
-  }
-  const todoCreate = await Todo.create({
-    task,
-    description,
-  });
+  try {
+    const { task, day } = await req.body;
+    if (task == "") {
+      throw new ApiError(400, "Provide taskName! Undefined task???");
+    }
+    const todoCreate = await Todo.create({
+      status: day,
+      task,
+    });
 
-  res.send(new ApiResponse(200, todoCreate, "TodoCreated Successfully"));
+    res.send(new ApiResponse(200, todoCreate, "TodoCreated Successfully"));
+  } catch (error) {
+    res.status(400).send(new ApiError(400, "TodoCreated Successfully", error));
+  }
 });
 const allTodoSend = asyncHandler(async (req, res) => {
   const todos = await Todo.find({});

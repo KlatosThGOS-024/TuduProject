@@ -1,6 +1,20 @@
 import React from "react";
 import { HeaderComponent } from "./HeaderComponent";
 
+export const AddStickyWall = ({ openAddMore }) => {
+  return (
+    <section
+      onClick={openAddMore}
+      className={` cursor-pointer bg-gray-300 w-[328px] h-[296px] rounded-lg py-[82px] px-[87px]  my-[12px] ml-[1px] shadow-2xl`}
+    >
+      <img
+        className="w-[116px]"
+        src="/icons/plus-large-thick-svgrepo-com.svg"
+      />
+    </section>
+  );
+};
+
 export const StickyWall = ({ color, task, subTask }) => {
   const bgColorClass = `bg-${color}-300`;
 

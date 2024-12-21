@@ -165,7 +165,7 @@ export const Todo = () => {
       <Logout />
       <div
         className=" grid place-items-center place-content-center
-       h-screen  space-y-2"
+         space-y-2"
       >
         <div>
           <h3 className=" font-custom font-[700] text-3xl">Today</h3>

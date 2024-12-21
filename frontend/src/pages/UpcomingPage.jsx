@@ -57,7 +57,7 @@ export const UpcomingPage = () => {
   return (
     <section className="w-full">
       <HeaderComponent children={"Upcoming"} />
-      <div className=" w-2/3 ">
+      <div>
         <Todos />
         <div className=" my-[18px] grid grid-cols-2 gap-4">
           <Todos status={"Tomorrow"} />

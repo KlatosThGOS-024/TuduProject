@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
-import connectionDB from "./db/index.js";
-import app from "./app.js";
-
 try {
   dotenv.config({ path: "./.env" });
 } catch (error) {
   console.log(error);
 }
+import connectionDB from "./db/index.js";
+import app from "./app.js";
+
 connectionDB()
   .then(() => {
     try {

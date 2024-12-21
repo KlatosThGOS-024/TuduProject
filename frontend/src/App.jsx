@@ -7,7 +7,7 @@ import { TodoPage } from "./pages/TodoPage";
 import { ProtectedRoute } from "./security/ProtectedRoute";
 import { PublicRoute } from "./security/PublicRoute";
 import { TodoPagee } from "./pages/TodoPagee";
-import { TodayPage } from "./pages/TodayTodoPage";
+import { TodayPage } from "./pages/TodayPage";
 function App() {
   return (
     <>
@@ -18,8 +18,8 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route path="/to/today" element={<TodayPage />} />
-          <Route path="/to/todo" element={<TodoPagee />} />
+          {/* <Route path="/to/today" element={<TodayPage />} /> */}
+          <Route path="/to/todo" element={<TodoPage />} />
         </Routes>
       </BrowserRouter>
     </>

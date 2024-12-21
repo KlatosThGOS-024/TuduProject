@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { HeaderComponent } from "./HeaderComponent";
-import { Input } from "../pages/TodayTodoPage";
+import { Input } from "../pages/TodayPage";
 import { SignOut } from "./SignOut";
 import { UpcomingPage } from "../pages/UpcomingPage";
 export function Task({ svg, text, setShow }) {
   return (
     <div
       onClick={() => {
-        setShow((input) => {
-          return !input;
-        });
+        setShow(text);
       }}
-      className=" hover:bg-[#EBEBEB] py-[1px] pointer-cursor 
+      className=" hover:bg-[#EBEBEB] py-[1px] cursor-pointer
     rounded-lg px-[12px]  ml-[12px] flex items-center gap-2"
     >
       <img className=" w-[20px]" src={svg} />
@@ -20,20 +18,27 @@ export function Task({ svg, text, setShow }) {
   );
 }
 
-export function Tasks({ setArray }) {
-  console.log(setArray);
+export function Tasks({ openPanelFunc }) {
   return (
     <section className=" mt-[38px] space-y-2">
       <span className="text-gray-500 font-Deca font-semibold">TASKS</span>
       <Task
-        setShow={setArray[0]}
+        setShow={openPanelFunc}
         text={"Upcoming"}
         svg={"/icons/angle-double-right-svgrepo-com.svg"}
       />
-      <Task text={"Today"} svg={"/icons/angle-double-right-svgrepo-com.svg"} />{" "}
-      <Task text={"Calender"} svg={"/icons/calendar.svg"} />{" "}
       <Task
-        setShow={setArray[1]}
+        setShow={openPanelFunc}
+        text={"Today"}
+        svg={"/icons/menu-symbol-of-three-parallel-lines-svgrepo-com.svg"}
+      />{" "}
+      <Task
+        setShow={openPanelFunc}
+        text={"Calendar"}
+        svg={"/icons/calendar.svg"}
+      />{" "}
+      <Task
+        setShow={openPanelFunc}
         text={"Sticky Wall"}
         svg={"/icons/sticky-note-svgrepo-com.svg"}
       />
@@ -107,11 +112,10 @@ function AddList({ setColor, setText, addList }) {
   );
 }
 
-export const MenuBar = ({ panelStates }) => {
-  console.log(panelStates);
+export const MenuBar = ({ panelStates, openPanelFunc }) => {
   return (
     <section
-      className=" bg-[#F4F4F4]  h-full 
+      className="  bg-[#F4F4F4] h-full
     rounded-lg px-[18px] py-[4px]
      my-[16px] w-full"
     >
@@ -121,7 +125,7 @@ export const MenuBar = ({ panelStates }) => {
             <HeaderComponent classAttribute={"text-[24px]"} children={"Menu"} />
           </div>
           <Input placeholder={"Search"} />
-          <Tasks />
+          <Tasks panelStates={panelStates} openPanelFunc={openPanelFunc} />
           <Lists />
         </div>
         <div className="  absolute bottom-0">

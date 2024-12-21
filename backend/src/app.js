@@ -3,6 +3,7 @@ import express from "express";
 import userRouter from "./routes/user.routes.js";
 
 import todoRouter from "./routes/todo.routes.js";
+import stickyWallRouter from "./routes/stickyWall.routes.js";
 const app = express();
 const customCORS = (req, res, next) => {
   const allowedOrigin = "http://localhost:5173";
@@ -35,5 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 //UserRoute
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/todos", todoRouter);
+app.use("/api/v1/stickyWall", stickyWallRouter);
 
 export default app;

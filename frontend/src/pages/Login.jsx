@@ -68,7 +68,7 @@ export const Login = () => {
           {user && <p>User not found</p>}
         </div>
       </div>
-      <div className=" w-[85%] hidden lg:grid place-items-center h-screen px-[96px] py-[58px] bg-blueSky-0">
+      <div className=" w-[85%] hidden lg:grid place-items-center  px-[96px] py-[58px] bg-blueSky-0">
         <img src="public\images\step_1.svg" alt="" />
       </div>
     </section>

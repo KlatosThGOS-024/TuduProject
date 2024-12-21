@@ -41,4 +41,22 @@ const getAllTodosRoute = async () => {
   console.log(response);
   return response;
 };
-export { deleteTodoRoute, saveTodosRoute, getAllTodosRoute };
+
+const addStickyRoute = async (task, subTasks) => {
+  console.log(task, subTasks);
+  const response = await fetch(
+    "http://localhost:8000/api/v1/stickyWall/save-sticky_wall",
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+
+      body: JSON.stringify({ task, subTasks: [subTasks] }),
+    }
+  );
+  return response;
+};
+
+export { deleteTodoRoute, saveTodosRoute, getAllTodosRoute, addStickyRoute };

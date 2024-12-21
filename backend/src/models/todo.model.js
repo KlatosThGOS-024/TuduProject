@@ -6,8 +6,9 @@ const todoSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    day: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }

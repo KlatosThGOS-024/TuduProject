@@ -1,5 +1,2 @@
-# Basic Node.js backend
-
-# Social Media Backend
-
-# Project Named as BackendCroject
+# TuduProject
+A simple To-Do list application to help users manage and track their tasks efficiently.

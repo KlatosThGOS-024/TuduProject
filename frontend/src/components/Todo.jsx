@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Todos } from "./Todos";
 import { Logout } from "./Logout";
 import { getAllTodosRoute, saveTodosRoute } from "../routes/todoRoutes";
-const todos1 = ["1", "2", "3", "4", "5"];
 
 const AddTodo = ({ task, setTask, description, setDescription }) => {
   const saveTheInputs = (event, setValue) => {

@@ -15,18 +15,26 @@ export const AddStickyWall = ({ openAddMore }) => {
   );
 };
 
-export const StickyWall = ({ color, task, subTask }) => {
+export const StickyWall = ({ id, color, task, subTask, deleteStickyRoute }) => {
   const bgColorClass = `bg-${color}-300`;
 
   return (
     <section
-      className={`my-[12px] ml-[1px] ${bgColorClass} w-[328px] h-[296px] rounded-lg px-[12px] py-[14px] shadow-2xl`}
+      className={`relative my-[12px] ml-[1px] ${bgColorClass} w-[328px] h-[296px] rounded-lg px-[12px] py-[14px] shadow-2xl`}
     >
+      <img
+        onClick={() => {
+          deleteStickyRoute(id);
+        }}
+        className="cursor-pointer w-[28px] absolute right-2 top-3"
+        src="/icons/icons8-cross-48.png"
+      />
       <HeaderComponent children={task} classAttribute={"text-[17px]"} />
       <div className="w-fit">
         {subTask.map((value) => {
+          const key = Math.random();
           return (
-            <div className=" flex items-center gap-3" key={value}>
+            <div className=" flex items-center gap-3" key={key}>
               <span>-</span>
               <p className=" text-[13px]">{value}</p>
             </div>

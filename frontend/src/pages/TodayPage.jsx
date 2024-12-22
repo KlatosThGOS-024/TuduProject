@@ -17,11 +17,7 @@ export function Input({ placeholder, setInput }) {
     </div>
   );
 }
-const data = [
-  "Research content idea",
-  "Research content idea",
-  "Research content idea",
-];
+
 function Todo({ todo }) {
   return (
     <>
@@ -33,7 +29,7 @@ function Todo({ todo }) {
     </>
   );
 }
-function Todos({ status }) {
+function Todos({ status, data }) {
   return (
     <div className=" border-[1px] rounded-lg px-[18px] py-[12px]">
       <div>
@@ -43,7 +39,8 @@ function Todos({ status }) {
         <Input placeholder={"Add New Task"}></Input>
       </div>
       <div className="my-[18px]">
-        <Todo todo={data[0]} /> <Todo todo={data[0]} /> <Todo todo={data[0]} />
+        <Todo todo={data[0]} />
+        <Todo todo={data[0]} />
         <Todo todo={data[0]} />
         <Todo todo={data[0]} />
       </div>
@@ -51,11 +48,57 @@ function Todos({ status }) {
   );
 }
 export const TodayPage = () => {
+  // const [addMore, setAddMore] = useState(false);
+  const [addTask, setAddTask] = useState("");
+  // const [addSubTasks, setAddSubTask] = useState([""]);
+  const [addData, setAddData] = useState([""]);
+  const [loading, setLoading] = useState(true);
+  const addStickyWall = async () => {
+    const response = await addStickyRoute(addTask, addSubTasks);
+    const data = await response.json();
+
+    if (data.statusCode === 200) {
+      setAddData((prevData) => [
+        ...prevData,
+        { task: addTask, subTasks: data.data.subTasks },
+      ]);
+    }
+  };
+  // const deleteStickyWall = async (id) => {
+  //   const response = await deleteStickyRoute(id);
+  //   const data = await response.json();
+
+  //   if (data.statusCode === 200) {
+  //     fetchStickyWall();
+  //   }
+  // };
+  // const fetchStickyWall = async () => {
+  //   const response = await getStickyRoute();
+  //   const data = await response.json();
+  //   if (data.statusCode === 200) {
+  //     setAddData(() => {
+  //       return data.data.map((item) => ({
+  //         ...item,
+  //         subTask: item.subTasks,
+  //         id: item._id,
+  //       }));
+  //     });
+  //   }
+
+  //   setLoading(false);
+  // };
+  // useEffect(() => {
+  //   fetchStickyWall();
+  // }, []);
+
+  // const openAddMore = () => {
+  //   setAddMore(!addMore);
+  // };
   return (
     <section className="w-full">
       <HeaderComponent children={"Today"} />
       <div className=" w-2/3 ">
-        <Todos />
+        <Todos data={addData} />
       </div>
     </section>
   );

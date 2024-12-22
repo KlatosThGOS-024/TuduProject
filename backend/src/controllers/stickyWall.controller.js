@@ -38,6 +38,17 @@ const getAllStickyWall = asyncHandler(async (req, res) => {
       .send(new ApiError(400, "stickyWall send Un-Successfully", error));
   }
 });
+const deleteStickyWall = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.body;
+    const request = await StickyWall.findByIdAndDelete(id);
+    res.send(new ApiResponse(200, request, "StickyWall deleted Successfully"));
+  } catch (error) {
+    res
+      .status(400)
+      .send(new ApiError(400, "stickyWall deleted Un-Successfully", error));
+  }
+});
 // const todoDelete = asyncHandler(async (req, res) => {
 //   const todoId = await req.body.todoId;
 //   if (todoId == " ") {
@@ -51,4 +62,4 @@ const getAllStickyWall = asyncHandler(async (req, res) => {
 //   res.send(new ApiResponse(200, todos, "TodoFound Successfully"));
 // });
 
-export { stickyWallSave, getAllStickyWall };
+export { stickyWallSave, getAllStickyWall, deleteStickyWall };

@@ -10,7 +10,7 @@ const todoSave = asyncHandler(async (req, res) => {
       throw new ApiError(400, "Provide taskName! Undefined task???");
     }
     const todoCreate = await Todo.create({
-      status: day,
+      day,
       task,
     });
 
@@ -26,7 +26,7 @@ const allTodoSend = asyncHandler(async (req, res) => {
 });
 const todoDelete = asyncHandler(async (req, res) => {
   const todoId = await req.body.todoId;
-  if (todoId == " ") {
+  if (todoId == "") {
     return new ApiError(
       401,
       "Todo Id is not present something went wrong with frontend"

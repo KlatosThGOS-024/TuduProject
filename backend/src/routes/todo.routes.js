@@ -1,11 +1,15 @@
 import { Router } from "express";
-import { allTodoSend, todoSave } from "../controllers/todo.controller.js";
+import {
+  allTodoSend,
+  todoDelete,
+  todoSave,
+} from "../controllers/todo.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const todoRouter = Router();
 
-todoRouter.route("/save-todos").post(verifyJWT, todoSave);
-todoRouter.route("/all-todos-show").get(verifyJWT, allTodoSend);
-// todoRouter.route("/todo-delete").post(verifyJWT, todoDelete);
+todoRouter.route("/save-todo").post(todoSave);
+todoRouter.route("/all-todos-get").get(allTodoSend);
+todoRouter.route("/todo-delete").post(todoDelete);
 
 export default todoRouter;

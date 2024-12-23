@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { HeaderComponent } from "../components/HeaderComponent";
 import { AddStickyWall, StickyWall } from "../components/StickyWall";
-import { Input } from "./TodayPage";
+// import { Input } from "./TodayPage";
 import {
   addStickyRoute,
   deleteStickyRoute,
   getStickyRoute,
 } from "../routes/todoRoutes";
+import { Input } from "../components/MenuBar";
 function AddMore({ setInput1, setInput2, addSticky }) {
   return (
     <div className="my-auto space-y-3">
@@ -34,7 +35,11 @@ export const StickyWallPage = () => {
     if (data.statusCode === 200) {
       setAddData((prevData) => [
         ...prevData,
-        { task: addTask, subTasks: data.data.subTasks },
+        {
+          task: data.data.task,
+          subTasks: data.data.subTasks,
+          id: data.data._id,
+        },
       ]);
     }
   };
@@ -53,7 +58,7 @@ export const StickyWallPage = () => {
       setAddData(() => {
         return data.data.map((item) => ({
           ...item,
-          subTask: item.subTasks,
+          subTasks: item.subTasks,
           id: item._id,
         }));
       });
@@ -85,7 +90,7 @@ export const StickyWallPage = () => {
                     id={value.id}
                     color="red"
                     task={value.task}
-                    subTask={value.subTasks}
+                    subTasks={value.subTasks}
                   />
                 ))
               )}

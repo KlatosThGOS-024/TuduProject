@@ -28,7 +28,7 @@ export const QualitySection = () => {
           <div className="  px-[8px] py-[30px] grid grid-cols-3 mt-[1000px]">
             <div className=" text-center space-y-4 ">
               <img
-                src="public\images\benefit3_efficiency.png"
+                src="/images\benefit3_efficiency.png"
                 className=" inline-block"
               />
               <h3 className="font-Fredoka">IMPROVE EFFICIENCY</h3>
@@ -40,7 +40,7 @@ export const QualitySection = () => {
             <div className=" text-center space-y-4">
               <img
                 className="inline-block"
-                src="public\images\benefit3_quality.png"
+                src="/images\benefit3_quality.png"
               />
               <h3 className="font-Fredoka">IMPROVE QUALITY</h3>
               <p className="font-Fredoka">
@@ -50,7 +50,7 @@ export const QualitySection = () => {
             <div className="  text-center space-y-4">
               <img
                 className=" inline-block"
-                src="public\images\benefit3_accountability.png"
+                src="/images\benefit3_accountability.png"
               />
               <h3 className="font-Fredoka">IMPROVE ACCOUNTABILITY</h3>
               <p className="font-Fredoka">

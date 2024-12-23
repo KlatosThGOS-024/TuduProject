@@ -15,7 +15,13 @@ export const AddStickyWall = ({ openAddMore }) => {
   );
 };
 
-export const StickyWall = ({ id, color, task, subTask, deleteStickyRoute }) => {
+export const StickyWall = ({
+  id,
+  color,
+  task,
+  subTasks,
+  deleteStickyRoute,
+}) => {
   const bgColorClass = `bg-${color}-300`;
 
   return (
@@ -31,7 +37,7 @@ export const StickyWall = ({ id, color, task, subTask, deleteStickyRoute }) => {
       />
       <HeaderComponent children={task} classAttribute={"text-[17px]"} />
       <div className="w-fit">
-        {subTask.map((value) => {
+        {subTasks.map((value) => {
           const key = Math.random();
           return (
             <div className=" flex items-center gap-3" key={key}>

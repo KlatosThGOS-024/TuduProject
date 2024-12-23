@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { HeaderComponent } from "./HeaderComponent";
-import { Input } from "../pages/TodayPage";
+
 import { SignOut } from "./SignOut";
 import { UpcomingPage } from "../pages/UpcomingPage";
+
+export function Input({ placeholder, setInput }) {
+  return (
+    <div className=" rounded-lg border-2 flex items-center gap-2 px-[12px] bg-white w-full">
+      <img
+        className=" cursor-pointer w-[18px]"
+        src="/icons/plus-large-thick-svgrepo-com.svg"
+      ></img>
+      <input
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+        className=" outline-none px-[5px] w-full py-[8px] placeholder:text-gray-400"
+        placeholder={placeholder}
+      ></input>
+    </div>
+  );
+}
 export function Task({ svg, text, setShow }) {
   return (
     <div
@@ -78,7 +96,7 @@ export function Lists() {
     setText("");
     setColor("");
   };
-  const listItems = [];
+
   return (
     <section className=" mt-[38px] space-y-2">
       <span className="text-gray-500 font-Deca font-semibold">TASKS</span>

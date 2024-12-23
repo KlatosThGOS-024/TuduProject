@@ -6,14 +6,14 @@ export const OfferSection = () => {
         <a href="#" className=" px-[24px]  ">
           <img
             className=" shadow-lg"
-            src="public\images\App-Store-button.png"
+            src="/images\App-Store-button.png"
             alt=""
           />
         </a>
         <a href="# " className=" px-[24px] ">
           <img
             className=" shadow-lg"
-            src="public\images\Google-Play-button.png"
+            src="/images\Google-Play-button.png"
             alt=""
           />
         </a>
@@ -41,7 +41,7 @@ export const OfferSection = () => {
         {/* image */}
         <img
           className=" w-[567px] h-[280px] shadow-lg rounded-lg"
-          src="public\images\video-thumbnail.png "
+          src="/images\video-thumbnail.png "
           alt=" video-thumnail"
         />
       </div>
@@ -50,7 +50,7 @@ export const OfferSection = () => {
         {/* image */}
         <img
           className=" w-[567px] h-[280px] shadow-lg rounded-lg"
-          src="public\images\integrated.png "
+          src="/images\integrated.png "
           alt=" video-thumnail"
         />
         {/* text offer */}

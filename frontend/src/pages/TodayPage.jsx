@@ -1,104 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderComponent } from "../components/HeaderComponent";
-export function Input({ placeholder, setInput }) {
-  return (
-    <div className=" rounded-lg border-2 flex items-center gap-2 px-[12px] bg-white w-full">
-      <img
-        className="w-[18px]"
-        src="/icons/plus-large-thick-svgrepo-com.svg"
-      ></img>
-      <input
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-        className=" outline-none px-[5px] w-full py-[8px] placeholder:text-gray-400"
-        placeholder={placeholder}
-      ></input>
-    </div>
-  );
-}
 
-function Todo({ todo }) {
-  return (
-    <>
-      <div className=" my-[12px] flex items-center gap-2 text-gray-800">
-        <input type="checkbox"></input>
-        <p>{todo}</p>
-      </div>
-      <hr></hr>
-    </>
-  );
-}
-function Todos({ status, data }) {
-  return (
-    <div className=" border-[1px] rounded-lg px-[18px] py-[12px]">
-      <div>
-        <HeaderComponent classAttribute={"text-[24px]"} children={status} />
-      </div>
-      <div>
-        <Input placeholder={"Add New Task"}></Input>
-      </div>
-      <div className="my-[18px]">
-        <Todo todo={data[0]} />
-        <Todo todo={data[0]} />
-        <Todo todo={data[0]} />
-        <Todo todo={data[0]} />
-      </div>
-    </div>
-  );
-}
+import {
+  deleteTodoRoute,
+  getAllTodosRoute,
+  saveTodosRoute,
+} from "../routes/todoRoutes";
+import { Todos } from "./UpcomingPage";
+
 export const TodayPage = () => {
-  // const [addMore, setAddMore] = useState(false);
-  const [addTask, setAddTask] = useState("");
-  // const [addSubTasks, setAddSubTask] = useState([""]);
-  const [addData, setAddData] = useState([""]);
-  const [loading, setLoading] = useState(true);
-  const addStickyWall = async () => {
-    const response = await addStickyRoute(addTask, addSubTasks);
-    const data = await response.json();
+  const [todoInput, setTodoInput] = useState("");
+  const [addData, setTodos] = useState([]);
 
+  const deleteTodo = async (id) => {
+    const response = await deleteTodoRoute(id);
+    const data = await response.json();
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.filter((todo) => todo._id !== id);
+      return updatedTodos;
+    });
+  };
+  const saveTheTodo = async () => {
+    const response = await saveTodosRoute(todoInput.task, todoInput.day);
+    const data = await response.json();
+    setTodos((prevTodos) => {
+      const updatedTodos = {
+        task: data.data.task,
+        _id: data.data._id,
+        day: data.data.day,
+      };
+      return [...prevTodos, updatedTodos];
+    });
+
+    setTodoInput("");
+  };
+
+  const fetchTodos = async () => {
+    const response = await getAllTodosRoute();
+    const data = await response.json();
     if (data.statusCode === 200) {
-      setAddData((prevData) => [
-        ...prevData,
-        { task: addTask, subTasks: data.data.subTasks },
-      ]);
+      setTodos((prevTodos) => {
+        const combinedTodos = [...prevTodos, ...data.data];
+        const uniqueTodos = combinedTodos.filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t._id === value._id)
+        );
+
+        return uniqueTodos;
+      });
     }
   };
-  // const deleteStickyWall = async (id) => {
-  //   const response = await deleteStickyRoute(id);
-  //   const data = await response.json();
 
-  //   if (data.statusCode === 200) {
-  //     fetchStickyWall();
-  //   }
-  // };
-  // const fetchStickyWall = async () => {
-  //   const response = await getStickyRoute();
-  //   const data = await response.json();
-  //   if (data.statusCode === 200) {
-  //     setAddData(() => {
-  //       return data.data.map((item) => ({
-  //         ...item,
-  //         subTask: item.subTasks,
-  //         id: item._id,
-  //       }));
-  //     });
-  //   }
-
-  //   setLoading(false);
-  // };
-  // useEffect(() => {
-  //   fetchStickyWall();
-  // }, []);
-
-  // const openAddMore = () => {
-  //   setAddMore(!addMore);
-  // };
+  useEffect(() => {
+    fetchTodos();
+  }, []);
   return (
     <section className="w-full">
       <HeaderComponent children={"Today"} />
-      <div className=" w-2/3 ">
-        <Todos data={addData} />
+      <div>
+        <Todos
+          day={"Today"}
+          todoArray={addData}
+          setTodoInput={setTodoInput}
+          deleteTodo={deleteTodo}
+          sendFunc={saveTheTodo}
+        />
       </div>
     </section>
   );

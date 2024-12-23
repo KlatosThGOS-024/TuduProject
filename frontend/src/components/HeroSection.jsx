@@ -30,7 +30,7 @@ export const HeroSection = () => {
           </div>
           <div className=" overflow-hidden  mt-[84px] relative max-w-[100%]  h-[521px] w-[ 1200px]">
             <img
-              src="public\images\app_block_sidebar.png "
+              src="/images\app_block_sidebar.png "
               className="w-full h-full object-contain "
               alt=" img"
             ></img>
@@ -38,10 +38,7 @@ export const HeroSection = () => {
         </div>
       </section>
       <div className=" relative -top-[148px]  rotate-180 -scale-y-100 w-full  ">
-        <img
-          className="w-full overflow-hidden "
-          src="public\images\download.svg"
-        />
+        <img className="w-full overflow-hidden " src="/images\download.svg" />
       </div>
     </>
   );

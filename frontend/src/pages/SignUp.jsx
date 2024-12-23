@@ -69,7 +69,7 @@ export const SignUp = () => {
   return (
     <section className=" w-full flex ">
       <div className="lg:max-w-[625px] flex flex-col  font-custom lg:min-w-[486px] py-[28px] px-[56px] w-full  ">
-        <img src="public\images\logo.png" className=" w-[156px]"></img>
+        <img src="/images\logo.png" className=" w-[156px]"></img>
         <div className=" py-[12%]">
           <h2 className=" text-[32px]">Start your free account</h2>
           <Link to={"/login"}> or, Login to your account</Link>
@@ -149,7 +149,7 @@ export const SignUp = () => {
         </div>
       </div>
       <div className=" w-[85%] hidden lg:grid place-items-center  px-[96px] py-[58px] bg-blueSky-0">
-        <img src="public\images\step_1.svg" alt="" />
+        <img src="/images\step_1.svg" alt="" />
       </div>
     </section>
   );

@@ -1,23 +1,12 @@
-// import React from "react";
-// import { Todo } from "../components/Todo"; // Check this path closely
-
-// export const TodoPage = () => {
-//   return (
-//     <div>
-//       <Todo />
-//     </div>
-//   );
-// };
-
-import { useState } from "react";
-import { MenuBar } from "../components/MenuBar";
-import { UpcomingPage } from "./UpcomingPage";
-import { TodayPage } from "./TodayPage";
 import { StickyWallPage } from "./StickyWallPage";
 import { CalendarPage } from "./CalendarPage";
+import { useState } from "react";
+import { TodayPage } from "./TodayPage";
+import { UpcomingPage } from "./UpcomingPage";
+import { MenuBar } from "../components/MenuBar";
 
 export const TodoPage = () => {
-  const [openComponent, setOpenComponent] = useState("Upcoming");
+  const [openComponent, setOpenComponent] = useState("Today");
   const openPanelFunc = (panel) => {
     setOpenComponent(panel);
   };

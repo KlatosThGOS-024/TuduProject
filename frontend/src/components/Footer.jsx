@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <>
       <div className=" ">
-        <img className="w-full" src="public\images\foot.svg"></img>
+        <img className="w-full" src="/images\foot.svg"></img>
       </div>
       <section
         className=" w-full
@@ -64,14 +64,14 @@ export const Footer = () => {
                 <a href="#" className=" inline-block">
                   <img
                     className=" shadow-lg"
-                    src="public\images\App-Store-button.png"
+                    src="/images\App-Store-button.png"
                     alt=""
                   />
                 </a>
                 <a href="# " className="inline-block ">
                   <img
                     className=" shadow-lg"
-                    src="public\images\Google-Play-button.png"
+                    src="/images\Google-Play-button.png"
                     alt=""
                   />
                 </a>

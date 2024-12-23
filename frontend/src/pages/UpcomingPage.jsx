@@ -69,7 +69,7 @@ function Todos({ day, todoArray, setTodoInput, sendFunc, deleteTodo }) {
     </div>
   );
 }
-export const UpcomingPage = () => {
+const UpcomingPage = () => {
   const [todos, setTodos] = useState([]);
   const [todoInput, setTodoInput] = useState("");
   const [UpComingTodo, setUpcTodos] = useState([]);
@@ -77,7 +77,6 @@ export const UpcomingPage = () => {
   const [WeekTodo, setWeekTodos] = useState([]);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    console.log(todos);
     setUpcTodos(todos.filter((todo) => todo.day === "upcoming"));
     setTomoTodos(todos.filter((todo) => todo.day === "tomorrow"));
     setWeekTodos(todos.filter((todo) => todo.day === "week"));
@@ -98,8 +97,7 @@ export const UpcomingPage = () => {
   };
 
   const deleteTodo = async (id) => {
-    const response = await deleteTodoRoute(id);
-    const data = await response.json();
+    await deleteTodoRoute(id);
     setTodos((prevTodos) => {
       const updatedTodos = prevTodos.filter((todo) => todo._id !== id);
       return updatedTodos;
@@ -157,3 +155,5 @@ export const UpcomingPage = () => {
     </section>
   );
 };
+
+export { Input, UpcomingPage, Todos };

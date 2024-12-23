@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { HeaderComponent } from "./HeaderComponent";
-
-import { SignOut } from "./SignOut";
+import { Link } from "react-router-dom";
 import { UpcomingPage } from "../pages/UpcomingPage";
+import { Options } from "./Options";
+import { getCurrentUser } from "../routes/userRoutes";
 
 export function Input({ placeholder, setInput }) {
   return (
@@ -70,21 +71,41 @@ export function List({ color, text }) {
     rounded-lg   ml-[12px] flex items-center gap-[18px]"
     >
       <div className="w-3 ">
-        <div className={` bg-${color}-400 p-3 rounded-md`}></div>
+        <div
+          style={{ backgroundColor: color }}
+          className={` bg-${color}-400 p-3 rounded-md`}
+        ></div>
       </div>
       <p className=" text-gray-500 font-Deca">{text}</p>
     </div>
   );
 }
+
 export function Lists() {
+  const getRandomIndex = (array) => {
+    return Math.floor(Math.random() * array.length);
+  };
+  const colors = [
+    "#fdba74",
+    "#fde047",
+    "#86efac",
+    "#5eead4",
+    "#93c5fd",
+    "#a5b4fc",
+    "#c4b5fd",
+    "#f9a8d4",
+    "#d1d5db",
+    "#fda4af",
+  ];
+
   const [openAddmorePanel, setOpenAddmorePanel] = useState(false);
-  const [color, setColor] = useState("");
+
   const [text, setText] = useState("");
   const [listItem, setlistItem] = useState([
-    { text: "Work", color: "orange" },
-    { text: "Personal", color: "red" },
-    { text: "List 1", color: "blue" },
-    { text: "Sticky Wall", color: "yellow" },
+    { text: "Work" },
+    { text: "Personal" },
+    { text: "List 1" },
+    { text: "Sticky Wall" },
   ]);
 
   const openAddMore = () => {
@@ -92,9 +113,8 @@ export function Lists() {
   };
 
   const addList = () => {
-    setlistItem([...listItem, { text, color }]);
+    setlistItem([...listItem, { text }]);
     setText("");
-    setColor("");
   };
 
   return (
@@ -102,7 +122,11 @@ export function Lists() {
       <span className="text-gray-500 font-Deca font-semibold">TASKS</span>
       <div>
         {listItem.map((item, index) => (
-          <List key={index} text={item.text} color={item.color} />
+          <List
+            key={index}
+            text={item.text}
+            color={colors[getRandomIndex(colors)]}
+          />
         ))}
       </div>
       <div className=" flex items-center gap-2 px-[12px] w-full">
@@ -111,7 +135,7 @@ export function Lists() {
           className=" cursor-pointer w-[18px]"
           src="/icons/plus-large-thick-svgrepo-com.svg"
         ></img>
-        <span className="">Add more list</span>
+        <span>Add more list</span>
       </div>
       {openAddmorePanel && (
         <AddList setColor={setColor} setText={setText} addList={addList} />
@@ -131,12 +155,55 @@ function AddList({ setColor, setText, addList }) {
 }
 
 export const MenuBar = ({ panelStates, openPanelFunc }) => {
+  const [showOptions, setShowOptions] = useState(true);
+  const handleClick = () => {
+    setShowOptions(!showOptions);
+  };
+  const [userPic, setUserrPic] = useState("");
+  const profile = async () => {
+    const response = await getCurrentUser();
+    const data = await response.json();
+
+    setUserrPic(data.data.avatar);
+  };
+
+  useEffect(() => {
+    profile();
+  }, []);
   return (
     <section
-      className="  bg-[#F4F4F4] h-full
-    rounded-lg px-[18px] py-[4px]
+      className=" bg-[#F4F4F4] h-full max-sm:h-fit
+    rounded-lg px-[18px] py-[4px] relative
      my-[16px] w-full"
     >
+      <div className="absolute right-0 z-30">
+        <div className="flex gap-1 items-center  ">
+          <img
+            onClick={handleClick}
+            src={`${userPic}`}
+            className="w-[60px] h-[60px] border-4 cursor-pointer border-white rounded-full"
+          />
+
+          {showOptions && (
+            <div>
+              {showOptions && (
+                <div>
+                  <div className="hover:bg-gray-200 px-[3px] rounded-lg">
+                    <Link to={"/to/profile"}>
+                      <span>Profile</span>
+                    </Link>
+                  </div>
+                  <div className="hover:bg-gray-200 px-[3px] rounded-lg">
+                    <Link to={"/to/logout"}>
+                      <span>SignOut</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
       <div className="relative  h-full ">
         <div className="px-[3px] py-[2px]">
           <div className="mb-[28px]">
@@ -147,7 +214,7 @@ export const MenuBar = ({ panelStates, openPanelFunc }) => {
           <Lists />
         </div>
         <div className="  absolute bottom-0">
-          <SignOut />
+          <Options />
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
   try {
-    const token = req.cookies?.accessToken;
+    const token = req.cookies?.accessToken || req.headers.authorization;
 
     if (!token) {
       throw new ApiError(400, "token not found");
@@ -21,7 +21,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
     next();
   } catch (error) {
     res
-      .status(409)
-      .json(new ApiError(409, "Cookie is not present or u tried to change it"));
+      .status(200)
+      .json(new ApiError(400, "Cookie is not present or u tried to change it"));
   }
 });

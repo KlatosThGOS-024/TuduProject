@@ -1,19 +1,27 @@
-import { useState } from "react";
-import { logInCheck } from "../routes/userRoutes";
 import { Outlet, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { logInCheck } from "../routes/userRoutes";
 
 export const ProtectedRoute = () => {
-  const [navHim, setNavHim] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
-  const checkLogin = async () => {
-    const response = await logInCheck();
-    const data = await response.json();
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const response = await logInCheck();
+        const data = await response.json();
+        setIsLoggedIn(data.success);
+      } catch (error) {
+        setIsLoggedIn(false);
+      }
+    };
 
-    if (data.statusCode !== 200) {
-      setNavHim(true);
-    }
-  };
-  checkLogin();
+    checkLogin();
+  }, []);
 
-  return navHim ? <Navigate to="/login" /> : <Outlet />;
+  if (isLoggedIn === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };

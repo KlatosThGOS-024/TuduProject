@@ -13,7 +13,7 @@ const day = [
 
 const Today = () => {
   return (
-    <div className="">
+    <div>
       <p>{day[today.getDay()]}</p>
       <div>Today todos</div>
     </div>

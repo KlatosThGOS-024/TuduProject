@@ -4,10 +4,11 @@ import { HomePage } from "./pages/HomePage";
 import { SignUp } from "./pages/SignUp";
 import { Login } from "./pages/Login";
 import { TodoPage } from "./pages/TodoPage";
-import { ProtectedRoute } from "./security/ProtectedRoute";
+import { ProfilePage } from "./pages/ProfilePage";
+import { Logout } from "./components/Logout";
 import { PublicRoute } from "./security/PublicRoute";
-// import { TodoPage } from "./pages/TodoPage";
-// import { TodayPage } from "./pages/TodayPage";
+import { ProtectedRoute } from "./security/ProtectedRoute";
+
 function App() {
   return (
     <>
@@ -18,8 +19,11 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          {/* <Route path="/to/today" element={<TodayPage />} /> */}
-          <Route path="/to/todo" element={<TodoPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/to/todo" element={<TodoPage />} />
+            <Route path="/to/profile" element={<ProfilePage />} />
+            <Route path="/to/logout" element={<Logout />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
@@ -27,6 +31,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <Route element={<ProtectedRoute />}>   </Route> */
-}

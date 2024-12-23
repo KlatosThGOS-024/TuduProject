@@ -26,5 +26,18 @@ const logInCheck = async () => {
   );
   return response;
 };
+const getCurrentUser = async () => {
+  const response = await fetch(
+    "http://localhost:8000/api/v1/users/get-currentUser",
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response;
+};
 
-export { logOutUser, logInUser, logInCheck };
+export { logOutUser, logInUser, logInCheck, getCurrentUser };

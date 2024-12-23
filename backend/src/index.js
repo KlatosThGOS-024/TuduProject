@@ -8,9 +8,10 @@ import connectionDB from "./db/index.js";
 import app from "./app.js";
 
 connectionDB()
-  .then(() => {
+  .then((res) => {
+    console.log(res);
     try {
-      app.listen(process.env.PORT, (req, res) => {
+      app.listen(process.env.PORT, (_, __) => {
         console.log("Server has been started on port", process.env.PORT);
       });
     } catch (error) {
@@ -20,8 +21,3 @@ connectionDB()
   .catch((err) => {
     console.log(err);
   });
-// import { connectionInstance } from "./db/index.js";
-// import app from "./app.js";
-// connectionInstance.then((res) => {
-//   console.log(res);
-// });

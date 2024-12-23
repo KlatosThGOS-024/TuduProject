@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <>
-      <div className=" ">
+      <div>
         <img className="w-full" src="/images\foot.svg"></img>
       </div>
       <section

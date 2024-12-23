@@ -1,20 +1,27 @@
-import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { logInCheck } from "../routes/userRoutes";
+
 export const PublicRoute = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
     const checkLogin = async () => {
-      const response = await logInCheck();
-      const data = await response.json();
-
-      setIsLoggedIn(data.statusCode === 200); // Set true if logged in, false otherwise
+      try {
+        const response = await logInCheck();
+        const data = await response.json();
+        setIsLoggedIn(data.success);
+      } catch (error) {
+        setIsLoggedIn(false);
+      }
     };
+
     checkLogin();
   }, []);
 
-  if (isLoggedIn === null) return null;
+  if (isLoggedIn === null) {
+    return <div>Loading...</div>;
+  }
 
   return isLoggedIn ? <Navigate to="/to/todo" /> : <Outlet />;
 };

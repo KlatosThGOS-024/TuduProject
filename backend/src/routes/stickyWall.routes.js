@@ -8,8 +8,8 @@ import {
 
 const stickyWallRouter = Router();
 
-stickyWallRouter.route("/save-sticky_wall").post(stickyWallSave);
-stickyWallRouter.route("/get-sticky_walls").get(getAllStickyWall);
-stickyWallRouter.route("/delete-sticky_wall").post(deleteStickyWall);
+stickyWallRouter.route("/save-sticky_wall").post(verifyJWT, stickyWallSave);
+stickyWallRouter.route("/get-sticky_walls").get(verifyJWT, getAllStickyWall);
+stickyWallRouter.route("/delete-sticky_wall").post(verifyJWT, deleteStickyWall);
 
 export default stickyWallRouter;

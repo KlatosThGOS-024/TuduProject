@@ -7,7 +7,7 @@ export const HeroSection = () => {
       >
         <div className="p-[54px] relative text-center  mx-auto w-[1200px]">
           {/* text */}
-          <div classNam="">
+          <div>
             <h2 className=" font-custom text-[48px] text-white leading-[48x]">
               See what you can achieve!
             </h2>

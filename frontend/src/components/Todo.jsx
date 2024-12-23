@@ -83,9 +83,9 @@ const DueDate = () => {
         >
           <path
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M12 2H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2ZM3 12V6h10v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8.5-1.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           ></path>
         </svg>
         <span>Today</span>
@@ -100,9 +100,9 @@ const DueDate = () => {
           >
             <path
               fill="currentColor"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M11.854 11.854a.5.5 0 0 0 0-.707L8.707 8l3.147-3.146a.5.5 0 0 0-.708-.707L8 7.293 4.854 4.147a.5.5 0 1 0-.708.707L7.293 8l-3.147 3.147a.5.5 0 1 0 .708.707L8 8.708l3.146 3.146a.5.5 0 0 0 .708 0Z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -120,7 +120,7 @@ const DueDate = () => {
 const PrefDiv = () => {
   return (
     <>
-      <div className=" ">
+      <div>
         <DueDate />
       </div>
     </>
@@ -179,9 +179,9 @@ export const Todo = () => {
             >
               <path
                 fill="currentColor"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
             <span className=" relative">

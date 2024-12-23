@@ -6,12 +6,14 @@ import asyncHandler from "../utils/asyncHandler.js";
 const todoSave = asyncHandler(async (req, res) => {
   try {
     const { task, day } = await req.body;
+    const userId = req.user._id;
     if (task == "") {
       throw new ApiError(400, "Provide taskName! Undefined task???");
     }
     const todoCreate = await Todo.create({
       day,
       task,
+      userId,
     });
 
     res.send(new ApiResponse(200, todoCreate, "TodoCreated Successfully"));
@@ -20,7 +22,8 @@ const todoSave = asyncHandler(async (req, res) => {
   }
 });
 const allTodoSend = asyncHandler(async (req, res) => {
-  const todos = await Todo.find({});
+  const userId = req.user._id;
+  const todos = await Todo.find({ userId });
 
   res.send(new ApiResponse(200, todos, "TodoFound Successfully"));
 });

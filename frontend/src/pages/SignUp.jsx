@@ -26,31 +26,24 @@ export const SignUp = () => {
     const { username, fullname, email, password } = params;
 
     const myFile = new FormData();
-    // console.log(myFile);
+
     myFile.append("avatar", file);
     myFile.append("username", username);
     myFile.append("fullname", fullname);
     myFile.append("email", email);
     myFile.append("password", password);
-    //   console.log(myFile.get("avatar"));
-    //const newParams = { username, fullname, email, password, myFile };
     const sendValues = async () => {
       const response = await fetch(
         "http://localhost:8000/api/v1/users/register",
         {
           method: "POST",
-
           body: myFile,
         }
       );
       const data = await response.json();
-      console.log(data);
     };
-    //  console.log(sendValues());
+
     sendValues();
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 5000);
   };
 
   const processImage = (e) => {
@@ -60,7 +53,6 @@ export const SignUp = () => {
       const fileReader = new FileReader();
       fileReader.onload = (e) => {
         setImagePrev(e.target.result);
-        console.log(e.target.result);
       };
       fileReader.readAsDataURL(selectedFile);
     }

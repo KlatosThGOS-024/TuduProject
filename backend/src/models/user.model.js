@@ -56,6 +56,14 @@ const userSchema = new Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    stickyWallId: {
+      type: Schema.Types.ObjectId,
+      ref: "StickyWall",
+    },
+    todoId: {
+      type: Schema.Types.ObjectId,
+      ref: "Todo",
+    },
   },
   {
     timestamps: true,
@@ -63,23 +71,19 @@ const userSchema = new Schema(
 );
 userSchema.methods.changePassword = async function (password) {
   try {
-    console.log("helofffffffffffffffffffffffffffffffffffffffff");
     password = await bcrypt.hash(password, 10);
-    console.log("fdfffffffffffffffffffffffffffffffffff", password);
+
     return password;
   } catch (error) {
     console.error("error");
   }
 };
 userSchema.pre("save", function (next) {
-  this.password =  bcrypt.hash(this.password, 10);
+  this.password = bcrypt.hash(this.password, 10);
   next();
 });
-userSchema.methods.isPasswordValid =  function (password) {
+userSchema.methods.isPasswordValid = function (password) {
   const compared = bcrypt.compare(password, this.password);
-  compared.then((pass) => {
-    console.log("fgddddddddddddddddddddddddddd", pass);
-  });
 };
 
 userSchema.methods.generateAccessToken = async function () {
@@ -105,14 +109,3 @@ userSchema.methods.generateResourceToken = async function () {
 };
 const User = mongoose.model("User", userSchema);
 export default User;
-//import { hash as _hash, compare } from "bcrypt";
-
-// // Hash a password
-// _hash("your-password", 10).then((hash) => {
-//   console.log("Hashed password:", hash);
-
-//   // Compare the hashed password with the original
-//   compare("your-password", hash).then((result) => {
-//     console.log("Password match result:", result);
-//   });
-// });

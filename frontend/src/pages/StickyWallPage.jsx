@@ -22,7 +22,23 @@ function AddMore({ setInput1, setInput2, addSticky }) {
     </div>
   );
 }
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+};
 export const StickyWallPage = () => {
+  const colors = [
+    "#fb923c",
+    "#facc15",
+    "#4ade80",
+    "#2dd4bf",
+    "#60a5fa",
+    "#818cf8",
+    "#a78bfa",
+    "#f472b6",
+    "#9ca3af",
+    "#fb7185",
+  ];
+
   const [addMore, setAddMore] = useState(false);
   const [addTask, setAddTask] = useState("");
   const [addSubTasks, setAddSubTask] = useState([""]);
@@ -39,6 +55,7 @@ export const StickyWallPage = () => {
           task: data.data.task,
           subTasks: data.data.subTasks,
           id: data.data._id,
+          color: colors[getRandomIndex(colors)],
         },
       ]);
     }
@@ -60,6 +77,7 @@ export const StickyWallPage = () => {
           ...item,
           subTasks: item.subTasks,
           id: item._id,
+          color: colors[getRandomIndex(colors)],
         }));
       });
     }
@@ -74,25 +92,28 @@ export const StickyWallPage = () => {
     setAddMore(!addMore);
   };
   return (
-    <section className="w-full">
+    <section className="w-full ">
       <div>
         <HeaderComponent children={"Sticky Wall"} />
-        <div className=" rounded-lg border-[2px] px-[3px] py-[2px]">
-          <div className="grid grid-cols-4 mx-3 my-[12px] ">
+        <div className="rounded-lg border-[2px] px-[3px] py-[2px]">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 md:gap-2  mx-3 my-[12px] ">
             <>
               {loading ? (
                 <p>Loading...</p>
               ) : (
-                addData.map((value, index) => (
-                  <StickyWall
-                    deleteStickyRoute={deleteStickyWall}
-                    key={value.id}
-                    id={value.id}
-                    color="red"
-                    task={value.task}
-                    subTasks={value.subTasks}
-                  />
-                ))
+                addData.map((value) => {
+                  console.log(value.color);
+                  return (
+                    <StickyWall
+                      deleteStickyRoute={deleteStickyWall}
+                      key={value.id}
+                      id={value.id}
+                      task={value.task}
+                      color={value.color}
+                      subTasks={value.subTasks}
+                    />
+                  );
+                })
               )}
             </>
 

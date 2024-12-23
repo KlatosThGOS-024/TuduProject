@@ -7,6 +7,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 const stickyWallSave = asyncHandler(async (req, res) => {
   try {
     const { task, subTasks } = await req.body;
+    const userId = req.user._id;
     if (task == "" || subTasks == "") {
       throw new ApiError(
         400,
@@ -16,6 +17,7 @@ const stickyWallSave = asyncHandler(async (req, res) => {
     const stickyWallCreate = await StickyWall.create({
       task,
       subTasks,
+      userId,
     });
 
     res.send(
@@ -29,8 +31,10 @@ const stickyWallSave = asyncHandler(async (req, res) => {
 });
 const getAllStickyWall = asyncHandler(async (req, res) => {
   try {
-    const stickyWalls = await StickyWall.find({});
-
+    const userId = req.user._id;
+    const stickyWalls = await StickyWall.find({
+      userId,
+    });
     res.send(new ApiResponse(200, stickyWalls, "TodoFound Successfully"));
   } catch (error) {
     res
@@ -49,17 +53,4 @@ const deleteStickyWall = asyncHandler(async (req, res) => {
       .send(new ApiError(400, "stickyWall deleted Un-Successfully", error));
   }
 });
-// const todoDelete = asyncHandler(async (req, res) => {
-//   const todoId = await req.body.todoId;
-//   if (todoId == " ") {
-//     return new ApiError(
-//       401,
-//       "Todo Id is not present something went wrong with frontend"
-//     );
-//   }
-//   const findTodo = await Todo.findByIdAndDelete({ _id: todoId }, {});
-//   const todos = await Todo.find({});
-//   res.send(new ApiResponse(200, todos, "TodoFound Successfully"));
-// });
-
 export { stickyWallSave, getAllStickyWall, deleteStickyWall };

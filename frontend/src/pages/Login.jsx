@@ -21,9 +21,9 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const logIn = async (params) => {
-    const data = await logInUser(params);
-    console.log(data.success);
-    if (data.status != 200) {
+    const response = await logInUser(params);
+    const data = await response.json();
+    if (data.statusCode != 200) {
       alert("User not found or password is incorrect");
       return;
     } else {

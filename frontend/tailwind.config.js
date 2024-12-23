@@ -13,6 +13,17 @@ export default {
         lightBlue: ["#325bff"],
         lightGreen: ["#2cca73"],
       },
+      container: {
+        center: true,
+        padding: "1rem", // Default padding
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+          "2xl": "1536px",
+        },
+      },
     },
   },
   plugins: [],

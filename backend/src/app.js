@@ -6,12 +6,7 @@ import todoRouter from "./routes/todo.routes.js";
 import stickyWallRouter from "./routes/stickyWall.routes.js";
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:5174",
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.static("public"));
 app.use(cookieParser());
 app.use(express.json());

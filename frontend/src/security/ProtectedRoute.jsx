@@ -4,13 +4,14 @@ import { logInCheck } from "../routes/userRoutes";
 
 export const ProtectedRoute = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  console.log("Harkirat123@Harkirat123@Harkirat123@Harkirat123@1");
 
   useEffect(() => {
     const checkLogin = async () => {
       try {
+        console.log("rum");
         const response = await logInCheck();
-        const data = await response.json();
-        setIsLoggedIn(data.success);
+        setIsLoggedIn(response.success);
       } catch (error) {
         setIsLoggedIn(false);
       }

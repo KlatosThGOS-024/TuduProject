@@ -23,6 +23,7 @@ export const Login = () => {
   const logIn = async (params) => {
     const response = await logInUser(params);
     const data = await response.json();
+    localStorage.setItem("accessToken", data.data.accessToken);
     if (data.statusCode != 200) {
       alert("User not found or password is incorrect");
       return;
